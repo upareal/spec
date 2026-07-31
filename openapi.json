@@ -1,0 +1,107 @@
+{
+    "openapi": "3.1.1",
+    "jsonSchemaDialect": "https://spec.openapis.org/oas/3.1/dialect/base",
+    "info": {
+        "title": "UpaReal Official API",
+        "description": "Our API uses a REST based design, leverages the JSON data format, and relies upon HTTPS for transport. We respond with meaningful HTTP response codes and if an error occurs, we include error details in the response body.",
+        "version": "latest",
+        "contact": {
+            "name": "Tarcisio F Sassara",
+            "email": "tarcisio.sassara@dominio.com.br"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "externalDocs": {
+        "description": "Github",
+        "url": "https://github.com/upareal/spec"
+    },
+    "servers": [
+        {
+            "url": "http://{host}:8080",
+            "variables": {
+                "host": {
+                    "default": "localhost"
+                }
+            },
+            "description": "Local server"
+        }
+    ],
+    "security": [
+        {
+            "bearer": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "User",
+            "description": "The currently authenticated user"
+        }
+    ],
+    "paths": {
+        "/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get the currently authenticated user",
+                "operationId": "getUser",
+                "responses": {
+                    "200": {
+                        "description": "The user info",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserResponse": {
+                "type": "object",
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "required": [
+                            "user"
+                        ],
+                        "properties": {
+                            "user": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

@@ -1,5 +1,7 @@
 # UpaReal OpenAPI spec
 
+Documentation at https://upareal.github.io/spec/
+
 ```bash
 # validation
 $ docker run --rm -v .:/spec redocly/cli lint openapi.json
